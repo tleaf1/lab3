@@ -1,21 +1,31 @@
 
 
 public class ArrayExamples {
-
+  static int[] temp = new int[0];
   // Changes the input array to be in reversed order
   static void reverseInPlace(int[] arr) {
-    for(int i = 0; i < arr.length; i += 1) {
-      arr[i] = arr[arr.length - i - 1];
+    temp = new int[arr.length];
+    for(int i = 0; i < arr.length; i++) {
+      temp[i] = arr[arr.length - i - 1];
     }
+    for (int k = 0; k < arr.length; k++) {
+      arr[k] = temp[k];
+    }
+  }
+  public static void main(String[] args) {
+    int [] input = {1,2,3,4,5};
+    
   }
 
   // Returns a *new* array with all the elements of the input array in reversed
   // order
   static int[] reversed(int[] arr) {
+
     int[] newArray = new int[arr.length];
     for(int i = 0; i < arr.length; i += 1) {
-      arr[i] = newArray[arr.length - i - 1];
+      newArray[i] = arr[arr.length - i - 1];
     }
+    arr = newArray;
     return arr;
   }
 
@@ -26,13 +36,22 @@ public class ArrayExamples {
     if(arr.length < 2) { return 0.0; }
     double lowest = arr[0];
     for(double num: arr) {
-      if(num < lowest) { lowest = num; }
+      if(num < lowest) { 
+        lowest = num; 
+      }
     }
     double sum = 0;
+    int count = 0;
     for(double num: arr) {
-      if(num != lowest) { sum += num; }
+      if(num == lowest) {
+        count++; 
+        continue; 
+      } else {
+        sum += num;
+      }
     }
-    return sum / (arr.length - 1);
+    double avg = sum / (arr.length - count);
+    return avg;
   }
 
 
